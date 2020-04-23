@@ -1,48 +1,46 @@
-## find-object (standalone) 
-Linux: [![Build Status](https://travis-ci.org/introlab/find-object.svg?branch=master)](https://travis-ci.org/introlab/find-object) Windows: [![Build status](https://ci.appveyor.com/api/projects/status/hn51r6p5c0peqctb/branch/master?svg=true)](https://ci.appveyor.com/project/matlabbe/find-object/branch/master)
+# [find_object_2D](https://github.com/SamuelHuet/simple_navigation_goals)
 
-Find-Object project, visit the [home page](http://introlab.github.io/find-object/) for more information.
+_[![ROS Melodic](https://img.shields.io/badge/ROS-Melodic-red)](http://wiki.ros.org/melodic/Installation/Ubuntu)_ _[![TurtleBot3](https://img.shields.io/badge/TurtleBot-3-brightgreen)](http://emanual.robotis.com/docs/en/platform/turtlebot3/pc_setup/)_ ![OpenCV](https://img.shields.io/badge/OpenCV-2-yellow) ![LICENSE](https://img.shields.io/badge/LICENSE-Apache%202.0-informational)
 
-## find_object_2d (ROS package)
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bb/Ros_logo.svg/800px-Ros_logo.svg.png" width="110"> ![MelodicTurtle][melodic-turtle]
 
-### Install
+>Project prototype using ROS with openCV for tracking applications.
 
-Binaries:
-```bash
-# ROS Kinetic:
- $ sudo apt-get install ros-kinetic-find-object-2d
-# ROS Jade:
- $ sudo apt-get install ros-jade-find-object-2d
-# ROS Indigo:
- $ sudo apt-get install ros-indigo-find-object-2d
-# ROS Hydro:
- $ sudo apt-get install ros-hydro-find-object-2d
+- [find_object_2D](#findobject2d)
+  - [Installation](#installation)
+  - [How To Run](#how-to-run)
+  - [Meta](#meta)
+  - [Contributing](#contributing)
+
+## Installation
+
+Simply clone this repository on your computer and compile the project using catkin_make:
+```
+$ cd ~/catkin_ws/src
+$ git clone https://github.com/SebastienFour/find-object.git
+$ cd ~/catkin_ws
+$ catkin_make
 ```
 
-Source:
+## How To Run
 
- * If you want SURF/SIFT on Indigo/Jade/Kinetic (Hydro has already SIFT/SURF), you have to build [OpenCV](http://opencv.org/) from source to have access to *nonfree* module. Install it in `/usr/local` (default) and the Find-Object should link with it instead of the one installed in ROS.
-
-     * On Indigo/Jade, I recommend to use latest 2.4 version ([2.4.11](https://github.com/Itseez/opencv/archive/2.4.11.zip)) and build it from source following these [instructions](http://docs.opencv.org/doc/tutorials/introduction/linux_install/linux_install.html#building-opencv-from-source-using-cmake-using-the-command-line). Find-Object can build with OpenCV3+[xfeatures2d](https://github.com/Itseez/opencv_contrib/tree/master/modules/xfeatures2d) module, but find_object_2d package will have libraries conflict as cv-bridge is depending on OpenCV2. If you want OpenCV3, you should build ros [vision-opencv](https://github.com/ros-perception/vision_opencv) package yourself (and all ros packages depending on it) so it can link on OpenCV3.
-
-     * On Kinetic, I recommend to use OpenCV3+[xfeatures2d](https://github.com/Itseez/opencv_contrib/tree/master/modules/xfeatures2d) module (*to confirm* OpenCV3 installed with ROS already includes SIFT/SURF, so no need to rebuild OpenCV). You can also install OpenCV2, but find_object_2d package will have libraries conflict as cv-bridge is depending on OpenCV3. Thus if you want OpenCV2 on Kinetic, you should build ros [vision-opencv](https://github.com/ros-perception/vision_opencv) package yourself (and all ros packages depending on it) so it can link on OpenCV2.
-
-```bash
-# Install ROS Groovy/Hydro/Indigo/Jade/Kinetic (catkin build):
- $ cd ~/catkin_ws
- $ git clone https://github.com/introlab/find-object.git src/find_object_2d
- $ catkin_make
-
-# Install ROS Fuerte (in a directory of your "ROS_PACKAGE_PATH"):
- $ svn checkout -r176 http://find-object.googlecode.com/svn/trunk/ros-pkg/find_object_2d
- $ rosmake find_object_2d
+```
+$ cd ~/catkin_ws/src/find_object
+$ roscore &
+$ rosrun find_object_2d find_object_2d image:=/camera/rgb/image_raw
 ```
 
-### Run
-```bash
- $ roscore &
- # Launch your preferred usb camera driver
- $ rosrun uvc_camera uvc_camera_node &
- $ rosrun find_object_2d find_object_2d image:=image_raw
-```
-See [find_object_2d](http://wiki.ros.org/find_object_2d) for more information.
+## Meta
+
+Distributed under the Apache 2.0 license. See ``LICENSE`` for more information.
+
+## Contributing
+
+1. Fork it (<https://github.com/introlab/find-object/fork>)
+2. Create your feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a new Pull Request
+
+<!-- Markdown link & img dfn's -->
+[melodic-turtle]: https://raw.githubusercontent.com/ros/ros_tutorials/melodic-devel/turtlesim/images/melodic.png
